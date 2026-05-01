@@ -1,24 +1,26 @@
 import { useState, useEffect } from 'react';
-import TodayPage from './pages/TodayPage';
-import SitPage from './pages/SitPage';
-import NaturePage from './pages/NaturePage';
+import ArrivePage from './pages/ArrivePage';
+import SpiralPage from './pages/SpiralPage';
+import EarthPage from './pages/EarthPage';
 import CoachPage from './pages/CoachPage';
-import RhythmPage from './pages/RhythmPage';
+import WellspringPage from './pages/WellspringPage';
+import SettingsPage from './pages/SettingsPage';
 import { getCurrentSeason } from './data/practices';
+import { getSettings } from './data/settings';
 
 const TABS = [
-  { id: 'today',  label: 'Today',  glyph: '○' },
-  { id: 'sit',    label: 'Sit',    glyph: '◯' },
-  { id: 'nature', label: 'Nature', glyph: '∿' },
-  { id: 'coach',  label: 'Coach',  glyph: '◈' },
-  { id: 'rhythm', label: 'Rhythm', glyph: '☾' },
+  { id: 'arrive',     label: 'Arrive',     glyph: '○' },
+  { id: 'spiral',     label: 'Spiral',     glyph: '∿' },
+  { id: 'earth',      label: 'Earth',      glyph: '◇' },
+  { id: 'coach',      label: 'Coach',      glyph: '◈' },
+  { id: 'wellspring', label: 'Wellspring', glyph: '⌘' },
 ];
 
 export default function App() {
-  const [tab, setTab] = useState('today');
+  const [tab, setTab] = useState('arrive');
   const [coachPrompt, setCoachPrompt] = useState(null);
+  const [settings, setSettings] = useState(() => getSettings());
 
-  // Register service worker
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
@@ -27,13 +29,18 @@ export default function App() {
     }
   }, []);
 
-  // Set seasonal data attribute so the CSS accent shifts with the Noongar year
   useEffect(() => {
     const season = getCurrentSeason();
     if (season?.name) {
       document.documentElement.setAttribute('data-season', season.name);
     }
   }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-palette', settings.palette || 'light');
+  }, [settings.palette]);
+
+  const refreshSettings = () => setSettings(getSettings());
 
   const handleNavigate = (tabId) => {
     setTab(tabId);
@@ -51,75 +58,112 @@ export default function App() {
     handleNavigate(tabId);
   };
 
+  const isSettings = tab === 'settings';
+
   return (
     <div
-      className="font-display min-h-screen max-w-[480px] mx-auto relative"
-      style={{
-        background:
-          'linear-gradient(170deg, #F7F5F0 0%, #EDE8E0 40%, #E8E4DC 100%)',
-        color: '#3D3830',
-      }}
+      className="font-display min-h-screen max-w-[480px] mx-auto relative palette-bg"
+      style={{ color: 'var(--c-text)' }}
     >
-      {/* Page content — keyed by tab so the fade-in re-runs on change */}
+      {/* Settings gear — top right */}
+      <button
+        onClick={() => handleNavigate(isSettings ? 'arrive' : 'settings')}
+        className="fixed top-4 right-4 z-30 w-9 h-9 rounded-full flex items-center justify-center transition-all"
+        style={{
+          background: 'var(--c-surface)',
+          border: '1px solid var(--c-border)',
+          color: isSettings ? 'var(--season-accent)' : 'var(--c-text-hint)',
+          fontSize: '15px',
+          backdropFilter: 'blur(10px)',
+        }}
+        aria-label="Settings"
+      >
+        ⚙
+      </button>
+
+      {/* Page content */}
       <main key={tab} className="page-in pb-28 safe-top">
-        {tab === 'today' && <TodayPage onNavigate={handleNavigate} />}
-        {tab === 'sit' && <SitPage />}
-        {tab === 'nature' && (
-          <NaturePage onNavigate={handleNavigate} onReflect={handleReflect} />
+        {tab === 'arrive' && (
+          <ArrivePage
+            onNavigate={handleNavigate}
+            settings={settings}
+          />
         )}
-        {tab === 'coach' && <CoachPage initialPrompt={coachPrompt} />}
-        {tab === 'rhythm' && <RhythmPage />}
+        {tab === 'spiral' && (
+          <SpiralPage onReflect={handleReflect} />
+        )}
+        {tab === 'earth' && (
+          <EarthPage
+            onNavigate={handleNavigate}
+            onReflect={handleReflect}
+          />
+        )}
+        {tab === 'coach' && (
+          <CoachPage initialPrompt={coachPrompt} />
+        )}
+        {tab === 'wellspring' && (
+          <WellspringPage onNavigate={handleNavigate} />
+        )}
+        {tab === 'settings' && (
+          <SettingsPage
+            settings={settings}
+            onSettingsChange={refreshSettings}
+            onBack={() => handleNavigate('arrive')}
+          />
+        )}
       </main>
 
-      {/* Bottom navigation — thumb-friendly, out of the way of the content */}
-      <nav
-        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-20 safe-bottom"
-        style={{
-          borderTop: '1px solid rgba(139,125,107,0.15)',
-          background: 'rgba(247,245,240,0.92)',
-          backdropFilter: 'blur(14px)',
-          WebkitBackdropFilter: 'blur(14px)',
-        }}
-      >
-        <div className="flex justify-around items-stretch">
-          {TABS.map((t) => {
-            const active = tab === t.id;
-            return (
-              <button
-                key={t.id}
-                onClick={() => handleTabChange(t.id)}
-                className="flex-1 flex flex-col items-center justify-center gap-1 py-3"
-                style={{ background: 'none' }}
-                aria-label={t.label}
-                aria-current={active ? 'page' : undefined}
-              >
-                <span
-                  className="text-base leading-none"
-                  style={{
-                    color: active ? 'var(--season-accent)' : '#A09080',
-                    transform: active ? 'scale(1.05)' : 'scale(1)',
-                    transition: 'color 240ms ease, transform 240ms ease',
-                  }}
+      {/* Bottom navigation */}
+      {!isSettings && (
+        <nav
+          className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-20 safe-bottom"
+          style={{
+            borderTop: '1px solid var(--c-border)',
+            background: 'var(--c-nav-bg)',
+            backdropFilter: 'blur(14px)',
+            WebkitBackdropFilter: 'blur(14px)',
+          }}
+        >
+          <div className="flex justify-around items-stretch">
+            {TABS.map((t) => {
+              const active = tab === t.id;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => handleTabChange(t.id)}
+                  className="flex-1 flex flex-col items-center justify-center gap-1 py-3"
+                  style={{ background: 'none' }}
+                  aria-label={t.label}
+                  aria-current={active ? 'page' : undefined}
                 >
-                  {t.glyph}
-                </span>
-                <span
-                  className="font-body uppercase"
-                  style={{
-                    fontSize: '9.5px',
-                    letterSpacing: '0.12em',
-                    fontWeight: active ? 500 : 300,
-                    color: active ? 'var(--season-accent)' : '#A09080',
-                    transition: 'color 240ms ease',
-                  }}
-                >
-                  {t.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </nav>
+                  <span
+                    className="text-base leading-none"
+                    style={{
+                      color: active ? 'var(--season-accent)' : 'var(--c-text-hint)',
+                      transform: active ? 'scale(1.05)' : 'scale(1)',
+                      transition: 'color 240ms ease, transform 240ms ease',
+                    }}
+                  >
+                    {t.glyph}
+                  </span>
+                  <span
+                    className="font-body uppercase"
+                    style={{
+                      fontSize: '9px',
+                      letterSpacing: '0.12em',
+                      fontWeight: active ? 500 : 300,
+                      color: active ? 'var(--season-accent)' : 'var(--c-text-hint)',
+                      transition: 'color 240ms ease',
+                    }}
+                  >
+                    {t.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }
