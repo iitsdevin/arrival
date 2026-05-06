@@ -123,7 +123,7 @@ export default function CoachPage({ initialPrompt }) {
             onChange={(e) => setKeyInput(e.target.value)}
             placeholder="sk-ant-..."
             className="w-full px-4 py-3 rounded-xl font-body outline-none mb-3"
-            style={{ fontSize: '14px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)' }}
+            style={{ fontSize: '16px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)' }}
           />
           <button
             onClick={handleSaveKey}
@@ -176,8 +176,8 @@ export default function CoachPage({ initialPrompt }) {
   }
 
   return (
-    <div className="flex flex-col" style={{ minHeight: 'calc(100svh - 96px)' }}>
-      <div className="px-6 pt-8 pb-3 flex items-center justify-between">
+    <div className="flex flex-col" style={{ height: 'calc(100dvh - 96px)' }}>
+      <div className="px-6 pt-8 pb-3 flex items-center justify-between shrink-0">
         <div>
           <h1 className="font-display font-light tracking-wide" style={{ fontSize: '24px' }}>Coach</h1>
           {stateObj && messages.length === 0 && (
@@ -198,7 +198,7 @@ export default function CoachPage({ initialPrompt }) {
         </div>
       </div>
 
-      <div className="flex-1 px-6 pb-4">
+      <div className="flex-1 px-6 pb-4 overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
         {messages.length === 0 && (
           <div className="py-10 text-center">
             <p className="font-display italic font-light mb-3" style={{ fontSize: '22px', color: 'var(--c-text-muted)', lineHeight: 1.4 }}>
@@ -248,7 +248,7 @@ export default function CoachPage({ initialPrompt }) {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="px-6 pt-3 pb-4 sticky bottom-0" style={{ background: 'var(--c-input-fade)' }}>
+      <div className="px-6 pt-3 pb-4 shrink-0" style={{ background: 'var(--c-bg)' }}>
         <form onSubmit={handleSubmit} className="flex gap-2 items-end">
           <textarea
             value={input}
@@ -257,7 +257,7 @@ export default function CoachPage({ initialPrompt }) {
             placeholder="What's here?"
             rows={1}
             className="flex-1 px-4 py-3 rounded-2xl font-body resize-none outline-none"
-            style={{ fontSize: '14px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)', maxHeight: 120 }}
+            style={{ fontSize: '16px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)', maxHeight: 120 }}
           />
           <button
             type="submit"

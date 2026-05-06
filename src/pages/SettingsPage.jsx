@@ -134,7 +134,7 @@ export default function SettingsPage({ settings, onSettingsChange, onBack }) {
                 onChange={(e) => setApiKeyInput(e.target.value)}
                 placeholder="sk-ant-..."
                 className="w-full px-4 py-3 rounded-xl font-body outline-none mb-3"
-                style={{ fontSize: '14px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)' }}
+                style={{ fontSize: '16px', background: 'var(--c-surface)', border: '1px solid var(--c-border)', color: 'var(--c-text)' }}
               />
               <button
                 onClick={handleSaveKey}

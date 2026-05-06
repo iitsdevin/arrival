@@ -172,7 +172,7 @@ export default function SpiralPage({ onReflect }) {
                 rows={3}
                 className="w-full px-4 py-3 rounded-xl font-body resize-none outline-none"
                 style={{
-                  fontSize: '14px',
+                  fontSize: '16px',
                   background: 'var(--c-surface)',
                   border: '1px solid var(--c-border)',
                   color: 'var(--c-text)',
@@ -222,7 +222,7 @@ export default function SpiralPage({ onReflect }) {
                 rows={5}
                 className="w-full px-4 py-3 rounded-xl font-body resize-none outline-none"
                 style={{
-                  fontSize: '14px',
+                  fontSize: '16px',
                   background: 'var(--c-surface)',
                   border: `1px solid ${mandalaChoice.color}25`,
                   color: 'var(--c-text)',
@@ -247,7 +247,7 @@ export default function SpiralPage({ onReflect }) {
                 rows={5}
                 className="w-full px-4 py-3 rounded-xl font-body resize-none outline-none"
                 style={{
-                  fontSize: '14px',
+                  fontSize: '16px',
                   background: 'var(--c-surface)',
                   border: '1px solid var(--c-border)',
                   color: 'var(--c-text)',
@@ -313,7 +313,7 @@ export default function SpiralPage({ onReflect }) {
                 rows={3}
                 className="w-full px-4 py-3 rounded-xl font-body resize-none outline-none"
                 style={{
-                  fontSize: '14px',
+                  fontSize: '16px',
                   background: 'var(--c-surface)',
                   border: '1px solid var(--c-border)',
                   color: 'var(--c-text)',
