@@ -3,7 +3,8 @@
  * on Whadjuk Noongar boodja (Perth, Western Australia).
  *
  * Inspired by Sophie Strand, Charlotte Joko Beck, Thich Nhat Hanh,
- * David Abram, Robin Wall Kimmerer, and Daniel Foor.
+ * David Abram, Robin Wall Kimmerer, Daniel Foor, Mark Coleman,
+ * and Rochelle Calvert.
  *
  * No direct quotes are reproduced. All attributions use "after [Author]"
  * to indicate paraphrased inspiration.
@@ -490,6 +491,108 @@ const prompts = [
     attribution: "after David Abram",
     seasons: ["Kambarang"],
     context: ["indoor"],
+    time: ["any"],
+  },
+
+  // ──────────────────────────────────────────────
+  // MARK COLEMAN / ROCHELLE CALVERT — Nature-based mindfulness
+  // ──────────────────────────────────────────────
+  {
+    text: "Attention is the first and last prayer. Whatever your eyes land on next — give it thirty seconds of your full, unhurried presence.",
+    attribution: "after Robin Wall Kimmerer",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Close your eyes. Listen to the furthest sound you can hear. Now the nearest. The space between those two sounds — that is the size of your awareness right now.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Your nervous system evolved outdoors, in the company of trees, wind, and open sky. Stepping outside is not a break from real life — it is a return to it.",
+    attribution: "after Rochelle Calvert",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Feel the air on your skin. Not the idea of air — the actual sensation. Temperature, moisture, movement. Your skin is the oldest sense organ you have. Let it report.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Find one thing growing toward the light right now. A tendril, a shoot, a lean. That impulse toward what sustains — you share it. Everything alive shares it.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["morning"],
+  },
+  {
+    text: "Let the earth hold your weight. You have been holding yourself up all day. The ground doesn't need you to perform uprightness. Sit. Lean. Be held.",
+    attribution: "after Rochelle Calvert",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["evening"],
+  },
+  {
+    text: "What is the quality of the light right now? Not its name — morning, dusk, overcast — but its quality. The way it touches surfaces. The shadows it leaves behind.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Breathe in through your nose and name what you smell. Earth, salt, eucalyptus, rain, dust. Your olfactory sense is the most ancient doorway back to presence.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "You are made of four elements: the solidity of earth in your bones, the water in your blood, the fire of your metabolism, the air of your breath. You are not in nature. You are nature, aware of itself.",
+    attribution: "after Mark Coleman",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "Let your gaze soften and rest on something beautiful — a leaf, a cloud, the bark of a tree. Stay with it. Notice what happens in your chest, your shoulders, your breath. Beauty is medicine for the nervous system.",
+    attribution: "after Rochelle Calvert",
+    seasons: ["all"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "In Djeran, the first rains are teaching the earth to soften again after the long dry. What in you is waiting to soften? What needs the gentleness of water?",
+    attribution: "after Rochelle Calvert",
+    seasons: ["Djeran"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "The heat of Birak silences the middle of the day. Even the birds rest. What would it mean to take the land's rhythm as your own — to rest when the earth rests?",
+    attribution: "after Mark Coleman",
+    seasons: ["Birak"],
+    context: ["outdoor"],
+    time: ["afternoon"],
+  },
+  {
+    text: "Makuru rain on your face is not discomfort — it is contact. The same water that fills the wetlands is touching your skin. There is no boundary between you and the watershed.",
+    attribution: "after Mark Coleman",
+    seasons: ["Makuru"],
+    context: ["outdoor"],
+    time: ["any"],
+  },
+  {
+    text: "In Djilba the wildflowers arrive like a declaration. They do not ask permission to be vivid. What in you is waiting for permission to bloom?",
+    attribution: "after Rochelle Calvert",
+    seasons: ["Djilba"],
+    context: ["outdoor"],
     time: ["any"],
   },
 ];

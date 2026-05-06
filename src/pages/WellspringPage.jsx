@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FIVE_ROOTS, TEACHINGS, NEW_SAINTS_WEEKS } from '../data/teachings';
-import { DAYS, DAY_DATA, PRACTICE_DETAIL } from '../data/practices';
+import { DAYS, DAY_DATA, PRACTICE_DETAIL, PRACTICE_GUIDES } from '../data/practices';
 import Timer from '../components/Timer';
 
 const INNER_TABS = [
@@ -16,6 +16,7 @@ export default function WellspringPage({ onNavigate }) {
   const [expandedTeaching, setExpandedTeaching] = useState(null);
   const [activeWeek, setActiveWeek] = useState(0);
   const [showTimer, setShowTimer] = useState(false);
+  const [expandedPractice, setExpandedPractice] = useState(null);
 
   const now = new Date();
   const todayIndex = now.getDay();
@@ -131,13 +132,51 @@ export default function WellspringPage({ onNavigate }) {
             {/* Practices */}
             <h3 className="section-label" style={{ color: root.color }}>practices</h3>
             <div className="space-y-2 mb-6">
-              {root.practices.map((p) => (
-                <div key={p} className="flex items-center gap-3 px-4 py-3 rounded-[12px]"
-                  style={{ background: 'var(--c-surface)', border: '1px solid var(--c-border)' }}>
-                  <span style={{ color: root.color }}>{root.glyph}</span>
-                  <span className="font-body" style={{ fontSize: '13px', color: 'var(--c-text-muted)' }}>{p}</span>
-                </div>
-              ))}
+              {root.practices.map((p) => {
+                const guide = PRACTICE_GUIDES[p];
+                const isExpanded = expandedPractice === p;
+                return (
+                  <div key={p}>
+                    <button
+                      onClick={() => setExpandedPractice(isExpanded ? null : p)}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] text-left transition-all"
+                      style={{
+                        background: isExpanded ? `${root.color}08` : 'var(--c-surface)',
+                        border: isExpanded ? `1px solid ${root.color}25` : '1px solid var(--c-border)',
+                      }}
+                    >
+                      <span style={{ color: root.color }}>{guide?.icon || root.glyph}</span>
+                      <span className="flex-1 font-body" style={{ fontSize: '13px', color: isExpanded ? 'var(--c-text)' : 'var(--c-text-muted)', fontWeight: isExpanded ? 500 : 400 }}>{p}</span>
+                      {guide && (
+                        <span className="font-body shrink-0" style={{ fontSize: '11px', color: 'var(--c-text-hint)' }}>
+                          {guide.duration}
+                        </span>
+                      )}
+                      <span className="font-body shrink-0" style={{ fontSize: '12px', color: 'var(--c-text-hint)' }}>
+                        {isExpanded ? '−' : '+'}
+                      </span>
+                    </button>
+                    {isExpanded && guide && (
+                      <div className="px-4 pt-3 pb-4 page-in">
+                        <p className="font-body italic leading-relaxed mb-3" style={{ fontSize: '13px', color: root.color, lineHeight: 1.6 }}>
+                          {guide.description}
+                        </p>
+                        <div className="rounded-[12px] p-4 mb-3" style={{ background: `${root.color}06`, border: `1px solid ${root.color}12` }}>
+                          <p className="font-body mb-1" style={{ fontSize: '10px', color: root.color, letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500 }}>
+                            How to practice
+                          </p>
+                          <p className="font-body leading-relaxed" style={{ fontSize: '13px', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>
+                            {guide.instructions}
+                          </p>
+                        </div>
+                        <p className="font-body" style={{ fontSize: '11px', color: 'var(--c-text-hint)', lineHeight: 1.5 }}>
+                          <span style={{ fontWeight: 500 }}>When:</span> {guide.whenToUse}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Prompts */}
@@ -361,10 +400,58 @@ export default function WellspringPage({ onNavigate }) {
                 </div>
 
                 <h3 className="section-label" style={{ color: w.color }}>practices this week</h3>
-                <div className="rounded-[14px] p-4 mb-5" style={{ background: 'var(--c-surface)', border: '1px solid var(--c-border)' }}>
-                  <p className="font-body leading-relaxed" style={{ fontSize: '13px', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>
-                    {w.practices}
-                  </p>
+                <div className="space-y-2 mb-5">
+                  {w.practices.split(', ').map((practiceStr) => {
+                    const nameMatch = practiceStr.match(/^([^(]+)/);
+                    const name = nameMatch ? nameMatch[1].trim() : practiceStr;
+                    const schedule = practiceStr.replace(name, '').trim();
+                    const guide = PRACTICE_GUIDES[name];
+                    const isExpanded = expandedPractice === `journey-${name}`;
+                    return (
+                      <div key={practiceStr}>
+                        <button
+                          onClick={() => guide && setExpandedPractice(isExpanded ? null : `journey-${name}`)}
+                          className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] text-left transition-all"
+                          style={{
+                            background: isExpanded ? `${w.color}08` : 'var(--c-surface)',
+                            border: isExpanded ? `1px solid ${w.color}25` : '1px solid var(--c-border)',
+                            cursor: guide ? 'pointer' : 'default',
+                          }}
+                        >
+                          <span style={{ color: w.color }}>{guide?.icon || '◯'}</span>
+                          <div className="flex-1 min-w-0">
+                            <span className="font-body block" style={{ fontSize: '13px', color: isExpanded ? 'var(--c-text)' : 'var(--c-text-muted)', fontWeight: isExpanded ? 500 : 400 }}>{name}</span>
+                            {schedule && (
+                              <span className="font-body block" style={{ fontSize: '10px', color: 'var(--c-text-hint)' }}>{schedule}</span>
+                            )}
+                          </div>
+                          {guide && (
+                            <span className="font-body shrink-0" style={{ fontSize: '12px', color: 'var(--c-text-hint)' }}>
+                              {isExpanded ? '−' : '+'}
+                            </span>
+                          )}
+                        </button>
+                        {isExpanded && guide && (
+                          <div className="px-4 pt-3 pb-4 page-in">
+                            <p className="font-body italic leading-relaxed mb-3" style={{ fontSize: '13px', color: w.color, lineHeight: 1.6 }}>
+                              {guide.description}
+                            </p>
+                            <div className="rounded-[12px] p-4 mb-3" style={{ background: `${w.color}06`, border: `1px solid ${w.color}12` }}>
+                              <p className="font-body mb-1" style={{ fontSize: '10px', color: w.color, letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 500 }}>
+                                How to practice
+                              </p>
+                              <p className="font-body leading-relaxed" style={{ fontSize: '13px', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>
+                                {guide.instructions}
+                              </p>
+                            </div>
+                            <p className="font-body" style={{ fontSize: '11px', color: 'var(--c-text-hint)', lineHeight: 1.5 }}>
+                              <span style={{ fontWeight: 500 }}>When:</span> {guide.whenToUse}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <h3 className="section-label" style={{ color: w.color }}>reflection</h3>

@@ -55,10 +55,10 @@ export const FIVE_ROOTS = [
     glyph: '∿',
     color: '#5A8F85',
     subtitle: 'you belong to this place',
-    teachers: ['Sophie Strand', 'Robin Wall Kimmerer', 'Joanna Macy', 'Josh Schrei'],
+    teachers: ['Sophie Strand', 'Robin Wall Kimmerer', 'Joanna Macy', 'Mark Coleman', 'Rochelle Calvert'],
     description: 'The animist vision: everything is alive, everything is in relationship. You are not in nature — you are nature, temporarily walking around and believing otherwise.',
-    teaching: `Sophie Strand writes that healing is not a return to some previous state — it is composting yourself into something new. The mycelium doesn't fix things; it transforms them. Death and decay are part of the cycle, not failures of the cycle.\n\nJoanna Macy calls this the Great Turning — the shift from a dying industrial civilisation to a life-sustaining one. It is happening now, in bodies, in gardens, in the courage it takes to feel grief for the living world and act anyway.\n\nRobin Wall Kimmerer teaches that gratitude is not a feeling — it is a practice, a way of returning the gifts that flow toward us.`,
-    practices: ['Sit With a Tree', 'Walk Without Input', 'Deep Time Walk', 'Nature Altar'],
+    teaching: `Sophie Strand writes that healing is not a return to some previous state — it is composting yourself into something new. The mycelium doesn't fix things; it transforms them.\n\nMark Coleman teaches that nature is the original meditation hall — when we step outside, the senses wake up and mindfulness becomes effortless. Rochelle Calvert goes further: the living world is an active partner in healing, a co-regulator for the nervous system.\n\nJoanna Macy calls this the Great Turning — the shift from a dying industrial civilisation to a life-sustaining one. Robin Wall Kimmerer teaches that gratitude is not a feeling — it is a practice, a way of returning the gifts that flow toward us.`,
+    practices: ['Sit With a Tree', 'Walk Without Input', 'Deep Time Walk', 'Nature Altar', 'Sensory Grounding', 'Healing with Nature', 'Four Elements Meditation'],
     prompts: [
       'Sophie Strand asks: what is the oldest living thing near you right now? Let your attention rest there, as an offering.',
       'The Noongar people have lived in relationship with this land for tens of thousands of years. What do you owe this place for receiving you?',
@@ -212,6 +212,14 @@ export const TEACHINGS = [
     body: `Audre Lorde wrote about the erotic as power — not sexuality specifically, but the life-force itself. The fullness of feeling. The knowing that comes from deep sensation rather than detached intellect. In a world that trains us to mistrust our bodies, reclaiming this knowing is a radical act.\n\nLama Rod Owens teaches that fierceness and love are not opposites. The fierceness of a parent protecting a child. The fierceness of a community refusing to let one of its members be erased. This is awakened care — love that refuses to be complicit in harm.\n\nYou can be loving AND fierce. Soft AND strong. Open AND boundaried. These are not contradictions — they are the complementary qualities of a person who has learned to love from a full, grounded place rather than a depleted one.`,
     practice: 'Notice where you have been choosing softness when fierceness was called for — or fierceness when softness was needed. What would it mean to practice the one you tend to avoid?',
   },
+  {
+    id: 'awake-wild',
+    title: 'Awake in the Wild',
+    root: 'ecology',
+    author: 'after Mark Coleman & Rochelle Calvert',
+    body: `The Buddha attained enlightenment under a tree. All of his spiritual practice — before and after awakening — took place in the forest. This is not accidental.\n\nMark Coleman teaches that nature is the original meditation hall. When we step outside, the senses wake up. The rustle of leaves, the scent of eucalyptus after rain, the feel of earth beneath bare feet — these are not distractions from practice, they are invitations into it. Mindfulness outdoors is not a lesser form of meditation. It is the form our bodies evolved for.\n\nRochelle Calvert takes this further: nature is not just a setting for practice but an active partner in healing. Somatic experiencing — the body-based healing of trauma — works differently when the nervous system has access to natural beauty. A tree can be a co-regulator. The rhythm of waves can teach the breath to settle. The vastness of the sky can hold what feels too large for the human frame.\n\nThis is not metaphor. The research on ecotherapy confirms what the body already knows: time in nature reduces cortisol, activates the parasympathetic nervous system, and increases the capacity for self-regulation. The land heals. It has always healed. We just need to show up and pay attention.`,
+    practice: 'Take your next meditation outdoors. Sit under a tree or beside water. For the first five minutes, do nothing but receive through the senses — listen, feel, smell. Then let the breath find its own rhythm. Notice how the body responds differently when held by the living world.',
+  },
 ];
 
 // All wisdom quotes — the full treasury
@@ -264,6 +272,14 @@ export const ALL_QUOTES = [
   { text: "In order to rise from its own ashes, a Phoenix first must burn.", author: "after Octavia Butler", root: 'ancestors', teacher: 'Octavia Butler' },
   { text: "Loneliness is a nervous system response to separation. Belonging heals this wound.", author: "after Becca Piastrelli", root: 'ancestors', teacher: 'Becca Piastrelli' },
   { text: "Boundaries are the distance at which I can love you and me simultaneously.", author: "after Prentis Hemphill", root: 'embodiment', teacher: 'Prentis Hemphill' },
+  { text: "Nature invites us to wake up to this extraordinary world in which we live.", author: "after Mark Coleman", root: 'ecology', teacher: 'Mark Coleman' },
+  { text: "When we are in nature, our senses are naturally more alive. We become more alert, more present.", author: "after Mark Coleman", root: 'ecology', teacher: 'Mark Coleman' },
+  { text: "Mindfulness of breathing outdoors is a way to harness our quality of attention — to be fully awake to what is happening.", author: "after Mark Coleman", root: 'stillness', teacher: 'Mark Coleman' },
+  { text: "Most of the time we go through life half asleep. Nature is the invitation to wake up.", author: "after Mark Coleman", root: 'ecology', teacher: 'Mark Coleman' },
+  { text: "Wakefulness is life. The master watches. He is clear.", author: "after Mark Coleman", root: 'stillness', teacher: 'Mark Coleman' },
+  { text: "The suffering we carry is not just in the mind. Nature can meet the body where therapy sometimes cannot.", author: "after Rochelle Calvert", root: 'ecology', teacher: 'Rochelle Calvert' },
+  { text: "Healing happens in relationship — with ourselves, with others, and with the living world around us.", author: "after Rochelle Calvert", root: 'ecology', teacher: 'Rochelle Calvert' },
+  { text: "The nervous system can reorganise in the presence of natural beauty. The body knows how to heal when given the right conditions.", author: "after Rochelle Calvert", root: 'embodiment', teacher: 'Rochelle Calvert' },
 ];
 
 // TEACHERS for settings toggle
@@ -287,6 +303,8 @@ export const TEACHERS_LIST = [
   { id: 'Resmaa Menakem', tradition: 'Somatic Abolitionism', root: 'embodiment' },
   { id: 'Shunryu Suzuki', tradition: 'Soto Zen', root: 'stillness' },
   { id: 'Becca Piastrelli', tradition: 'Ancestral Belonging', root: 'ancestors' },
+  { id: 'Mark Coleman', tradition: 'Nature-Based Mindfulness', root: 'ecology' },
+  { id: 'Rochelle Calvert', tradition: 'Somatic Ecotherapy', root: 'ecology' },
 ];
 
 export function getFilteredQuotes(activeTeachers) {
